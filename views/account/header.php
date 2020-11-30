@@ -10,41 +10,6 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 </head>
 <body>
-    <?php
-        session_start();
-        $infoName = 'Error!';
-        if(isset($_SESSION['username'])){
-            $checkCookie = false;
-            if(isset($_COOKIE['cookie'])){
-                foreach ($account as $value) {
-                    if($value->remember_token == $_COOKIE['cookie']){
-                        $checkCookie = true;
-                        $infoName = $value->name;
-                    }
-                }
-            if($checkCookie == false){
-                header('Location: index.php?controller=LogIn&action=index');
-            }
-            }else{
-                foreach ($account as $value) {
-                    if($value->email == $_SESSION['username']){
-                        $infoName = $value->name;
-                    }
-                }
-            }
-        }else{
-            if(!isset($_COOKIE['cookie'])){
-                header('Location: index.php?controller=LogIn&action=index');
-            }else{
-                foreach ($account as $value) {
-                    if($value->remember_token == $_COOKIE['cookie']){
-                        $infoName = $value->name;
-                        $checkCookie = true;
-                    }
-                }
-            }
-        }
-    ?>
     <div class="container">
         <div class="header">
             <div class="menu">
@@ -56,7 +21,7 @@
             <div class="setting">
                 <span class="info">User:
                     <?php
-                        echo($infoName);
+                        echo($_SESSION['username']);
                     ?>
                 </span>
                 <a href="index.php?controller=LogIn&action=LogOut" title="Log out"><i class="fas fa-sign-out-alt"></i></a>

@@ -63,5 +63,12 @@
             $sql = "DELETE FROM phpbasic.users WHERE id = ".$id;
             $db->query($sql);
         }
+
+        static function checkCookie($cookie)
+        {
+            $db = DB::getInstance();
+            $sql = "SELECT * FROM phpbasic.users WHERE remember_token = '" . $cookie ."'";
+            return $db->query($sql)->fetchAll();
+        }
     }
 ?>

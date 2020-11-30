@@ -12,5 +12,6 @@
         $controller = 'Account';
         $action = 'index';
     }
+    
     require_once('routes.php');
 ?>

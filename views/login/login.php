@@ -16,7 +16,7 @@
             </div>
             <p class="error-text">
                 <?php
-                    session_start();
+                    // session_start();
                     if(isset($_SESSION['message'])){
                         echo($_SESSION['message']);
                         unset($_SESSION['message']);

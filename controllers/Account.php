@@ -1,10 +1,28 @@
 <?php
+    session_start();
     require_once('controllers/BaseController.php');
     require_once('models/MAccount.php');
 
     class AccountController extends BaseController{
         function __construct(){
             $this->folder = 'account';
+            if(isset($_COOKIE['cookie'])){
+                $data = MAccount::checkCookie($_COOKIE['cookie']);
+                if($data){
+                    foreach ($data as $value) {
+                        $_SESSION['username'] = $value['name'];
+                    }
+                }else{
+                    unset($_SESSION['username']);
+                    setcookie("cookie", "", time()-(60*60*24*7),"/");
+                    unset($_COOKIE["cookie"]);
+                    header('Location: index.php?controller=LogIn&action=index');
+                }
+            }
+
+            if(empty($_SESSION['username'])){
+                header('Location: index.php?controller=LogIn&action=index');
+            }
         }
         public function index(){
             $items = MAccount::get();
@@ -13,23 +31,26 @@
         }
         public function create(){
             if(empty($_GET['id'])){
-                $this->render('form');
+                $items = MAccount::get();
+                $data = array('account' => $items);
+                $this->render('form', $data);
             }else{
                 $id = isset($_GET['id']) ? $_GET['id'] : NULL;
-                $item = MAccount::getById($id);
-                $data = array('account' => $item);
-                $this->render('form', $data);
+                if(is_numeric($id)){
+                    $item = MAccount::getById($id);
+                    if(empty($item)){
+                        header('Location: index.php?controller=Account&action=create');
+                    }else{
+                        $data = array('account' => $item);
+                        $this->render('form', $data);
+                    }
+                }else{
+                    header('Location: index.php?controller=Account&action=create');
+                }
+                
             }
         }
         public function stoge(){
-            // $n=20; 
-            // $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'; 
-            // $randomString = ''; 
-            // for ($i = 0; $i < $n; $i++) { 
-            //     $index = rand(0, strlen($characters) - 1); 
-            //     $randomString .= $characters[$index]; 
-            // } 
-
             $name = $_POST['name'];
             $email = $_POST["email"];
             $email_verified_at = date("Y-m-d H:i:s");

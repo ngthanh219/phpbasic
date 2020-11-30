@@ -6,7 +6,7 @@
                 $title = $href = $button = "";
                 $id = $name = $email = $password = "";
                 $checkInputNoneEmail = false;
-                if(isset($account)){
+                if(!empty($_GET['id'])){
                     $checkInputNoneEmail = true;
                     foreach ($account as $value) {
                         $id = $value->id;
