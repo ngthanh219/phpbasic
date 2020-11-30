@@ -5,7 +5,7 @@
         public static function getInstance() {
           if (!isset(self::$instance)) {
             try {
-              self::$instance = new PDO('mysql:host=localhost;dbname=phpbasic', 'root', 'Root1234@');
+              self::$instance = new PDO('mysql:host=localhost;dbname=phpbasic', 'root', '');
               self::$instance->exec("SET NAMES 'utf8'");
             } catch (PDOException $ex) {
               die($ex->getMessage());
@@ -14,4 +14,8 @@
           return self::$instance;
         }
     }
+?>
+
+<?php
+    
 ?>

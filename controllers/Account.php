@@ -6,23 +6,23 @@
     class AccountController extends BaseController{
         function __construct(){
             $this->folder = 'account';
-            if(isset($_COOKIE['cookie'])){
-                $data = MAccount::checkCookie($_COOKIE['cookie']);
-                if($data){
-                    foreach ($data as $value) {
-                        $_SESSION['username'] = $value['name'];
+                if(isset($_COOKIE['cookie'])){
+                    $data = MAccount::checkCookie($_COOKIE['cookie']);
+                    if($data){
+                        foreach ($data as $value) {
+                            $_SESSION['username'] = $value['name'];
+                        }
+                    }else{
+                        unset($_SESSION['username']);
+                        setcookie("cookie", "", time()-(60*60*24*7),"/");
+                        unset($_COOKIE["cookie"]);
+                        header('Location: index.php?controller=LogIn&action=index');
                     }
-                }else{
-                    unset($_SESSION['username']);
-                    setcookie("cookie", "", time()-(60*60*24*7),"/");
-                    unset($_COOKIE["cookie"]);
+                }
+
+                if(empty($_SESSION['username'])){
                     header('Location: index.php?controller=LogIn&action=index');
                 }
-            }
-
-            if(empty($_SESSION['username'])){
-                header('Location: index.php?controller=LogIn&action=index');
-            }
         }
         public function index(){
             $items = MAccount::get();
@@ -70,7 +70,7 @@
                 "updated_at"            =>$updated_at
             );
 
-            // stripslashes($name) //validation space
+           
             session_start();
             $checkEmail = false;
             if(strlen($name) > 5 && strlen($name) < 50 && preg_match("/[a-zA-Z]/", $name)){

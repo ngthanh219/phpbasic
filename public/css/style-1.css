@@ -1,0 +1,38 @@
+.menu {
+    display: flex;
+    list-style: none;
+    align-items: center;
+    padding: 20px 10px;
+}
+.menu-navbar1{
+    width: 70%;
+    margin: auto;
+    justify-content: space-between;
+}
+.tintuc {
+    width: 90%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #e7e7e7;;
+    padding: 20px 10px;
+}
+.column-content {
+    display: flex;
+}
+.content {
+    margin:0 0 0 40px ;
+}
+.icon-edit {
+    margin: 0 10px 0 0;
+}
+.link {
+    
+    padding-right: 30px;
+}
+.link a {
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+}
