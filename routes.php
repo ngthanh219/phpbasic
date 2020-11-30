@@ -3,6 +3,7 @@
     $controllers = array(
         'Account' => ['index','create','stoge','update','destroy'],
         'LogIn' => ['index','logIn'],
+        'New' => ['index']
     ); 
     // Check param url
     if (!array_key_exists($controller, $controllers) || !in_array($action, $controllers[$controller])) {
@@ -29,6 +30,11 @@
                     $action = 'logOut';
                 }
                 break;
+             case 'New':
+                    if($action == 'index'){
+                        $action = 'index';
+                    }
+                    break;
             default:
                 $controller = 'Account';
                 $action = 'index';
