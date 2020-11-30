@@ -1,5 +1,7 @@
 <?php
+    session_start();
     require_once('controllers/BaseController.php');
+    // require_once('views/login/login.php');
     require_once('models/MAccount.php');
 
     class LogInController extends BaseController{
@@ -29,9 +31,6 @@
                     $checkLogIn = true;
                     $infoName = $value->name;
                     $infoEmail = $value->email;
-                    echo '<pre>';
-                    var_dump($value->remember_token);
-                    echo '</pre>';
                 }
             }
             
@@ -42,9 +41,11 @@
                 if($remember == 'on'){
                     setcookie('cookie', $md5Info,  time() + (86400 * 30), "/"); 
                 }
-                $items = MAccount::get();
-                $data = array('account' => $items);
-                $this->render('home', $data);
+                // $items = MAccount::get();
+                // $data = array('account' => $items);
+                // $this->render('home', $data);
+
+                header('Location: index.php?controller=Account&action=index');
             }else{
                 $_SESSION["message"] = "Tài khoản không hợp lệ";
                 header('Location: index.php?controller=LogIn&action=index');

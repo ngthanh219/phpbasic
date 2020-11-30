@@ -16,7 +16,8 @@
                         </div>
                         <div class="col_name item-active">Fullname</div>
                         <div class="col_username item-active">Email</div>
-                        <div class="col_password item-active">Password</div>
+                        <div class="col_password item-active">Created_at</div>
+                        <div class="col_password item-active">Update_at</div>
                         <div class="actions item-active">Actions</div>
                     </div>
                     <div class="scroll-wapper">
@@ -29,7 +30,8 @@
                                     </div>
                                     <div class="col_name"><?= $value->name ?></div>
                                     <div class="col_username"><?= $value->email ?></div>
-                                    <div class="col_password"><?= $value->password ?></div>
+                                    <div class="col_password"><?= date('d/m/Y h:m:s',strtotime($value->created_at)) ?></div>
+                                    <div class="col_password"><?= date('d/m/Y h:m:s',strtotime($value->update_at)) ?></div>
                                     <div class="actions">
                                         <a class="icon" href="index.php?controller=Account&action=create&id=<?= $value->id ?>" title="Sửa">
                                             <i class="fas fa-edit"></i>
