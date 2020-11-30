@@ -3,7 +3,7 @@
     $controllers = array(
         'Account' => ['index','create','stoge','update','destroy'],
         'LogIn' => ['index','logIn'],
-        'New' => ['index']
+        'New' => ['index', 'create', 'stoge', 'update','doUpdate','destroy']
     ); 
     // Check param url
     if (!array_key_exists($controller, $controllers) || !in_array($action, $controllers[$controller])) {
@@ -32,9 +32,17 @@
                 break;
              case 'New':
                     if($action == 'index'){
-                        $action = 'index';
-                    }
-                    break;
+                        $action = 'index';                 
+                }else if($action == 'create'){
+                    $action = 'create';
+                }else if($action == 'stoge'){
+                    $action = 'stoge';
+                }else if($action == 'update'){
+                    $action = 'update';
+                }else if($action == 'destroy'){
+                    $action = 'destroy';
+                }
+                break;
             default:
                 $controller = 'Account';
                 $action = 'index';

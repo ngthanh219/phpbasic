@@ -44,9 +44,11 @@
 
         static function stoge($object)
         {
+           
             $db = DB::getInstance();
             $sql = "INSERT INTO phpbasic.users (id, name, email, email_verified_at, password, remember_token, created_at, updated_at)
             VALUES (null, '".$object['name']."', '".$object['email']."', '".$object['email_verified_at']."', '".$object['password']."', '".$object['remember_token']."', '".$object['created_at']."', '".$object['updated_at']."')";
+            
             $db->query($sql);
         }
 

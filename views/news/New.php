@@ -40,11 +40,11 @@
     }
   
     public function stoge(){
-      $title = htmlspecialchars($_POST['title']);
-      $content = htmlspecialchars($_POST['content']);
+      $title = $_POST['title'];
+      $content = $_POST['content'];
       $time = date("Y-m-d H:i:s");
-      $url_anh = htmlspecialchars($_POST['url_anh']);
-      $tag = htmlspecialchars($_POST['tag']);
+      $url_anh = $_POST['url_anh'];
+      $tag = $_POST['tag'];
   
       $post = array(
         'title' => $title,
@@ -57,21 +57,21 @@
       session_start();
       if(strlen($title) < 5 && strlen($content) < 5 && strlen($tag) < 3){
         $_SESSION['errorLength'] = "Phải trên 5 kí tự !!";
-        header('Location: index.php?controller=New&action=create');
+        header('Location: index.php?controller=home_controller&action=create');
   
       }else{
-        $items = MNews::stoge($post);
+        $items = Model::stoge($post);
   
         $_SESSION["message1"] = "Thêm mới thành công";
-         header('Location: index.php?controller=New&action=index');
+         header('Location: index.php?controller=home_controller&action=index');
         // $_SESSION["message"] = "Thêm mới thành công";
-        //  header('Location: index.php?controller=New&action=index');
+        //  header('Location: index.php?controller=home_controller&action=index');
       }
     }
     
     public function update(){
       $id = isset($_GET['id']) ? $_GET['id'] : NULL;
-      $items = MNews::getById($id);
+      $items = Model::getById($id);
       
       
       $data = array('tintuc' => $items);
@@ -81,11 +81,11 @@
     }
     public function doUpdate(){
       $id = isset($_POST['id']) ? $_POST['id'] : NULL;
-      $title = htmlspecialchars($_POST['title']);
-      $content = htmlspecialchars($_POST['content']);
-      $time = date("Y-m-d H:i:s");
-      $url_anh = htmlspecialchars($_POST['url_anh']);
-      $tag = htmlspecialchars($_POST['tag']);
+      $title = $_POST['title'];
+      $content = $_POST['content'];
+      $time = $_POST['time'];
+      $url_anh = $_POST['url_anh'];
+      $tag = $_POST['tag'];
   
       $post = array(
         'id' => $id,
@@ -96,16 +96,16 @@
         'tag' => $tag
       );
   
-      $items = MNews::doUpdate($post);
-      header('Location: index.php?controller=New&action=index');
+      $items = Model::doUpdate($post);
+      header('Location: index.php?controller=home_controller&action=index');
     }
   
     public function destroy(){
       $id = isset($_GET['id']) ? $_GET['id'] : NULL;
-              MNews::delete($id);
+              Model::delete($id);
               session_start();
               $_SESSION["message"] = "Xóa thành công";
-              header('Location: index.php?controller=New&action=index');
+              header('Location: index.php?controller=home_controller&action=index');
     }
     }
 
