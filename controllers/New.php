@@ -55,11 +55,23 @@
       );
   
       session_start();
-      if(strlen($title) < 5 && strlen($content) < 5 && strlen($tag) < 3){
-        $_SESSION['errorLength'] = "Phải trên 5 kí tự !!";
-        header('Location: index.php?controller=New&action=create');
-  
-      }else{
+      if(strlen($title) < 5){
+          $_SESSION['errorLength'] = "Yêu cầu nhập field title!!";
+          header('Location: index.php?controller=New&action=create');
+      }
+        if(strlen($content) < 5){
+          $_SESSION['errorLength1'] = "Yêu cầu nhập field content!!";
+          header('Location: index.php?controller=New&action=create');
+        }
+          if(strlen($tag) < 3 ){
+            $_SESSION['errorLength2'] = "Yêu cầu nhập field tag!!";
+            header('Location: index.php?controller=New&action=create');
+          }
+            if(strlen($url_anh) < 10 ){
+              $_SESSION['errorLength3'] = "Yêu cầu URL !!";
+              header('Location: index.php?controller=New&action=create');
+            }
+      else{
         $items = MNews::stoge($post);
   
         $_SESSION["message1"] = "Thêm mới thành công";
@@ -95,9 +107,28 @@
         'url_anh' => $url_anh,
         'tag' => $tag
       );
-  
+      
+      session_start();
+      if(strlen($title) < 5){
+          $_SESSION['errorLength'] = "Yêu cầu nhập field title!!";
+          header('Location: index.php?controller=New&action=create');
+      }
+        if(strlen($content) < 5){
+          $_SESSION['errorLength1'] = "Yêu cầu nhập field content!!";
+          header('Location: index.php?controller=New&action=create');
+        }
+          if(strlen($tag) < 3 ){
+            $_SESSION['errorLength2'] = "Yêu cầu nhập field tag!!";
+            header('Location: index.php?controller=New&action=create');
+          }
+            if(strlen($url_anh) < 10 ){
+              $_SESSION['errorLength3'] = "Yêu cầu URL !!";
+              header('Location: index.php?controller=New&action=create');
+            }
+      else {
       $items = MNews::doUpdate($post);
       header('Location: index.php?controller=New&action=index');
+      }
     }
   
     public function destroy(){
