@@ -19,7 +19,6 @@
                         header('Location: index.php?controller=LogIn&action=index');
                     }
                 }
-
                 if(empty($_SESSION['username'])){
                     header('Location: index.php?controller=LogIn&action=index');
                 }
@@ -46,8 +45,7 @@
                     }
                 }else{
                     header('Location: index.php?controller=Account&action=create');
-                }
-                
+                }               
             }
         }
         public function stoge(){
@@ -58,7 +56,6 @@
             $remember_token = $email.$password;
             $created_at = date("Y-m-d H:i:s");
             $updated_at = date("Y-m-d H:i:s");
-            
 
             $object = array(
                 "name"                  =>$name,
@@ -68,9 +65,7 @@
                 "remember_token"        =>md5($remember_token),
                 "created_at"            =>$created_at,
                 "updated_at"            =>$updated_at
-            );
-
-           
+            );         
             session_start();
             $checkEmail = false;
             if(strlen($name) > 5 && strlen($name) < 50 && preg_match("/[a-zA-Z]/", $name)){

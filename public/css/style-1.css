@@ -18,6 +18,9 @@
     border-bottom: 1px solid #e7e7e7;;
     padding: 20px 10px;
 }
+.btn {
+    display: flex;
+}
 .column-content {
     display: flex;
 }
@@ -35,4 +38,17 @@
     text-decoration: none;
     color: black;
     font-size: 20px;
+}
+.images-box {
+    width: 30%;
+    height: 260px;
+}
+.images-box img {
+    width: 100%;
+}
+.content h2 {
+    font-size: 18px;
+}
+.content p {
+    font-size: 14px;
 }

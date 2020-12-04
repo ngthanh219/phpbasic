@@ -13,7 +13,7 @@
                         unset($_SESSION['message1']);   
                     } 
             ?>
-        <div class="content">
+        <div class="content" style="background-color:#fff !important">
             <div class="topbar">
                 <a href="index.php?controller=New&action=create" class="topbar-btn" title="Add account">
                     <i class="fas fa-plus-circle" aria-hidden="true"></i>
@@ -23,8 +23,10 @@
             <?php foreach ($tintuc as $value) : ?>
                 <div class='tintuc'>        
                     <div class='column-content'>
-                        <img src="<?=  $value->url_anh ?> " alt="">
-                        <div class="content">
+                        <div class="images-box">
+                            <img src="<?=  $value->url_anh ?> " alt="">
+                        </div>
+                        <div class="content" style="background-color:#fff !important">
                             <h2><?=  $value->title ?></h2>
                             <p><?=  $value->content ?></p>
                             <p><?=  $value->time ?></p>
